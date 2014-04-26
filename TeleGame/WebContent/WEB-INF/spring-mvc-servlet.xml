@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven enable-matrix-variables="true" />
+	<context:component-scan base-package="com.iac.vcb.market.controller" />
+
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<description>
+			这点是必需的还是非必需的呢？
+			如果定义了
+			DefaultAnnotationHandlerMapping，它就可以将请求来的 url 和被注解了 @RequesMapping
+			的指进行匹配。当然，说这句话的前提是定义 DefaultAnnotationHandlerMapping 的优先级比定义了其它的
+			HandlerMapping 的优先级要高(如果定义了其它的话)。
+			如果没有定义
+			DefaultAnnotationHandlerMapping，并不代表不能映射到相应的 handler 上。因为如果你定义了其它的
+			HandlerMapping，请求过来的 url 和注解了的 @RequestMapping 里的值正好能匹配上，那么没有
+			DefaultAnnotationHandlerMapping，@Controller 一样可以如鱼得水的被捕获到。
+			当然，如果你要使用基于注解的 @Controller，最好还是老老实实地注册
+			DefaultAnnotationHandlerMapping。
+		</description>
+	</bean>
+
+
+	<!-- freemarker config -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+			</map>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">10</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+
+	<!-- View resolvers can also be configured with ResourceBundles or XML files. 
+		If you need different view resolving based on Locale, you have to use the 
+		resource bundle resolver. -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+	</bean>
+
+
+
+</beans>
