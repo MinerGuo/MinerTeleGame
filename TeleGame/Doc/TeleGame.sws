@@ -4,8 +4,8 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{14EE8995-1F94-47FC-A8E6-4DE7E1575984}" Loaded="No" Name="TeleGamePhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="TeleGamePhysicalDataModel_1.pdm"/>
-		<Model Expanded="Yes" ID="{14EE8995-1F94-47FC-A8E6-4DE7E1575984}" Name="TeleGamePhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="TeleGamePhysicalDataModel_1.pdm"/>
+		<Model Expanded="Yes" ID="{14EE8995-1F94-47FC-A8E6-4DE7E1575984}" Name="TeleGamePhysicalDataModel_1" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="TeleGamePhysicalDataModel_1.pdm"/>
+		<Model Expanded="Yes" ID="{14EE8995-1F94-47FC-A8E6-4DE7E1575984}" Name="TeleGamePhysicalDataModel_1" OpenedReadOnly="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="TeleGamePhysicalDataModel_1.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
