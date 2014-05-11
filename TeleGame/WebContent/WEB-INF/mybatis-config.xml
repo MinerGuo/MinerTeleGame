@@ -7,9 +7,8 @@
 
 	<typeAliases>
 
-		<!-- 权限start 
-		<typeAlias alias="User"
-			type="com.pinganfu.newcard.gm.facade.bean.model.resource.User" />-->
+		<typeAlias alias="BUser" type="com.miner525xuan.telegame.db.model.BUser"/>
+		<typeAlias alias="BMenu" type="com.miner525xuan.telegame.db.model.BMenu"/>
 		
 		
 	

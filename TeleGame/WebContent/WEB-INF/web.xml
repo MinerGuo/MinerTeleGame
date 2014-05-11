@@ -32,9 +32,9 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring-mvc</servlet-name>
-		<url-pattern>/app/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
 	<!-- 设置post方式提交的表单的过滤编码 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -80,5 +80,6 @@
 	        <servlet-name>default</servlet-name>
 	        <url-pattern>*.css</url-pattern>
 	</servlet-mapping>
+	
 
 </web-app>

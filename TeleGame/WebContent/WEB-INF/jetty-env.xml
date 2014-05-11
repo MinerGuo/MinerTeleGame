@@ -6,7 +6,7 @@
 		<Arg>
 			 <New class="org.apache.commons.dbcp.BasicDataSource">
 				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>
-				<Set name="url">jdbc:mysql://localhost:3306/dx</Set>
+				<Set name="url">jdbc:mysql://localhost:3306/dx?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true</Set>
 				<Set name="username">dx</Set>
 				<Set name="password">dx</Set>
 				<Set name="maxActive">10</Set>    	

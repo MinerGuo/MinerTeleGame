@@ -13,12 +13,12 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	
-	
+	<context:annotation-config />
 	<!-- 这个包的定义是和spring mvc 里的要区分开的，一个是spring mvc的注解使用，一个是spring framework的使用，是不一样的 -->
 	<context:component-scan base-package="com.miner525xuan.telegame" />
-
+	
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
 	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
