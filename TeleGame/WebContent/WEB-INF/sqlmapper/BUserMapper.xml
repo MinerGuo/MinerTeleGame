@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BUser">
+	<resultMap id="BUserMap" type="BUser" >
+		<id column="id" property="id"/>
+		<result column="id" property="id"/>
+		<result column="loginName" property="loginName"/>
+		<result column="password" property="password"/>
+		<result column="tryLoginCount" property="tryLoginCount"/>
+		<result column="specialFlag" property="specialFlag"/>
+		<result column="lastLoginTime" property="lastLoginTime"/>
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"/>
+		<result column="lastUpdateTime" property="lastUpateTime"/>
+	</resultMap>
+
+	<sql id="column">
+		 id        
+		 ,loginName	           
+		 ,password	       
+		 ,tryLoginCount              
+		 ,specialFlag	       
+		 ,lastLoginTime	       
+		 ,status
+		 ,createTime
+		 ,lastUpdateTime	           
+	</sql>
+	
+	<sql id="queryParam">
+		<if test="loginName!=null and loginName!=''"> and loginName =#{loginName}</if>
+		<if test="id!=null"> and id =#{id}</if>
+	</sql>
+	
+	<sql id="setParam">
+		<set>
+			<if test="loginName != null">loginName=#{loginName},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="tryLoginCount != null">tryLoginCount=#{tryLoginCount},</if>
+			<if test="specialFlag != null">specialFlag=#{specialFlag},</if>
+			<if test="lastLoginTime != null">lastLoginTime=#{lastLoginTime},</if>
+			<if test="status != null">status=#{status},</if>
+			<if test="createTime != null">createTime=#{createTime},</if>
+			<if test="lastUpdateTime != null">lastUpdateTime=#{lastUpdateTime},</if>
+		</set>
+	</sql>
+
+
+	<select id="count" resultType="java.lang.Integer" parameterType="BUser">
+		SELECT COUNT(1) FROM TB_User WHERE 1=1
+		<include refid="queryParam" />
+	</select>
+
+	<select id="queryByModel" resultMap="BUserMap" parameterType="BUser">
+		SELECT
+		<include refid="column" />
+			FROM TB_User WHERE 1=1
+		<include refid="queryParam" />
+	</select>
+	
+	<select id="queryOneByPK" resultType="BUser" parameterType="java.lang.Integer">
+		SELECT 
+		<include refid="column" />
+			FROM TB_User WHERE id=#{id}
+	</select>
+
+	<insert id="add" parameterType="BUser">
+		INSERT INTO TB_User
+		(     
+			loginName	           
+			,password	       
+			,tryLoginCount              
+			,specialFlag	       
+			,lastLoginTime	       
+			,status
+			,createTime
+			,lastUpdateTime		          
+		)
+		VALUES
+		(
+			 #{loginName,jdbcType=VARCHAR}
+			,#{password,jdbcType=VARCHAR}
+			,#{tryLoginCount,jdbcType=INTEGER}
+			,#{specialFlag,jdbcType=CHAR}
+			,#{lastLoginTime,jdbcType=DATE}
+			,#{status,jdbcType=INTEGER}
+			,#{createTime,jdbcType=DATE}
+			,#{lastUpdateTime,jdbcType=DATE}
+		)
+	</insert>
+	
+	<update id="updateByModel" parameterType="BUser">
+		update TB_User
+			<include refid="setParam" />
+		 WHERE id=#{id}
+	</update>
+
+	<delete id="deleteByPK" parameterType="java.lang.Integer">
+		DELETE * FROM TB_User
+		WHERE id=#{id}
+	</delete>
+</mapper>

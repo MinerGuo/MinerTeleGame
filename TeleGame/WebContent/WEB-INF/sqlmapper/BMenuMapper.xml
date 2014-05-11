@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BMenu">
+	<resultMap id="BMenuMap" type="BMenu" >
+		<id column="id" property="id"/>
+		<result column="id" property="id"/>
+		<result column="menuName" property="menuName"/>
+		<result column="url" property="url"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="parentID" property="parentID"/>
+		<result column="childCount" property="childCount"/>
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"/>
+		<result column="lastUpdateTime" property="lastUpdateTime"/>
+	</resultMap>
+
+	<sql id="column">
+		 id        
+		 ,menuName	           
+		 ,url	       
+		 ,orderNum              
+		 ,parentID	       
+		 ,childCount	       
+		 ,status
+		 ,createTime
+		 ,lastUpdateTime	           
+	</sql>
+	
+	<sql id="queryParam">
+		<if test="menuName!=null and menuName!=''"> and menuName =#{menuName}</if>
+		<if test="parentID!=null"> and parentID =#{parentID}</if>
+		<if test="id!=null"> and id =#{id}</if>
+	</sql>
+	
+	<sql id="setParam">
+		<set>
+			<if test="menuName != null">menuName=#{menuName},</if>
+			<if test="url != null">url=#{url},</if>
+			<if test="orderNum != null">orderNum=#{orderNum},</if>
+			<if test="parentID != null">parentID=#{parentID},</if>
+			<if test="childCount != null">childCount=#{childCount},</if>
+			<if test="status != null">status=#{status},</if>
+			<if test="createTime != null">createTime=#{createTime},</if>
+			<if test="lastUpdateTime != null">lastUpdateTime=#{lastUpdateTime},</if>
+		</set>
+	</sql>
+
+
+	<select id="count" resultType="java.lang.Integer" parameterType="BMenu">
+		SELECT COUNT(1) FROM TB_Menu WHERE 1=1
+		<include refid="queryParam" />
+	</select>
+
+	<select id="queryByModel" resultMap="BMenuMap" parameterType="BMenu">
+		SELECT
+		<include refid="column" />
+			FROM TB_Menu WHERE 1=1
+		<include refid="queryParam" />
+			order by orderNum
+	</select>
+	
+	<select id="queryOneByPK" resultType="BMenu" parameterType="java.lang.Integer">
+		SELECT 
+		<include refid="column" />
+			FROM TB_Menu WHERE id=#{id}
+	</select>
+
+	<insert id="add" parameterType="BMenu">
+		INSERT INTO TB_Menu
+		(     
+			menuName	           
+			,url	       
+			,orderNum              
+			,parentID	       
+			,childCount	       
+			,status
+			,createTime
+			,lastUpdateTime		          
+		)
+		VALUES
+		(
+			 #{menuName,jdbcType=VARCHAR}
+			,#{url,jdbcType=VARCHAR}
+			,#{orderNum,jdbcType=INTEGER}
+			,#{parentID,jdbcType=INTEGER}
+			,#{childCount,jdbcType=INTEGER}
+			,#{status,jdbcType=INTEGER}
+			,#{createTime,jdbcType=DATE}
+			,#{lastUpdateTime,jdbcType=DATE}
+		)
+	</insert>
+	
+	<update id="updateByModel" parameterType="BMenu">
+		update TB_Menu
+			<include refid="setParam" />
+		 WHERE id=#{id}
+	</update>
+
+	<delete id="deleteByPK" parameterType="java.lang.Integer">
+		DELETE * FROM TB_Menu
+		WHERE id=#{id}
+	</delete>
+</mapper>
